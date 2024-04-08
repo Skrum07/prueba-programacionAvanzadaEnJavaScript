@@ -1,10 +1,11 @@
-import animal from './animal.js';
+import Animal from './animal.js';
 
-export class aguila extends animal{
-    constructor(nombre, edad, img, comentarios, sonido){
-        super(nombre, edad, img, comentarios, sonido)
+export class Aguila extends animal {
+    constructor(nombre, edad, img, comentarios, sonido) {
+        super(nombre, edad, img, comentarios, sonido);
     }
-chillido(){
-    document.getElementById(`auio${this.nombre}`).onplay();
+
+    chillido() {
+        document.getElementById(`audio${this.nombre}`).play();
     }
 }

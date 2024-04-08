@@ -1,4 +1,4 @@
-class animal {
+class Animal {
     #nombre;
     #edad;
     #img;
@@ -22,10 +22,10 @@ class animal {
         return this.#img;
     }
     get comentarios() {
-        return this.comentarios;
+        return this.#comentarios;
     }
     get sonido() {
-        return this.sonido;
+        return this.#sonido;
     }
 }
-export  default animal;
+export  default Animal;
