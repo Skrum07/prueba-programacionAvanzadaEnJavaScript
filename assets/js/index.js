@@ -1,131 +1,67 @@
-// import { aguila } from "./aguila.js";
-// import { leon } from "./leon.js";
-// import { lobo } from "./lobo.js";
-// import { oso } from "./oso.js";
-// import {serpiente} from "./serpiente.js";
+import {aguila} from './aguila.js';
+import {leon} from './leon.js';
+import {lobo} from './lobo.js';
+import {oso} from './oso.js';
+import {serpiente} from './serpiente.js';
 
-// const animalInvest = [];
+const url = './animales.json'
+const animalInvestigado = [];
 
-// const animalPromise = (async () => {
-//     const url = './animales.json';
-//     try{
-//         let response = await fetch(url);
-//         if(!response.ok) throw new Error('HTTP error! status: '+response.status);
-//         let data = await response.json();
-//         return data.animales;
-//     }catch(error){
-//         console.log("Error al obtener los animales"); 
-//         console.log(error);
-//     };
-// })();
-// animalPromise.then((animal))
 
-// document.getElementById('btnRegistrar').addEventListener('click', () => {
-//     let animal = document.getElementById('animal').value;
-//     let edad = document.getElementById('edad').value;
-//     let comentarios = document.getElementById('comentarios').value;
+const animales = await (async () => {
+    try{
+        let response = await fetch(url);
+        if(!response.ok) throw new Error('HTTP error! status: '+response.status);
+        let data = await response.json();
+        return data.animales;
+    }catch(error){
+        console.log("Error al obtener los animales");
+    }
+})();
 
-//     if(document.getElementById('animal')options[0].select ===true){
-//         alert(`Seleccione un animal`);
-//         return;
-//     }
-//     if(document.getElementById('edad')options[0].select ===true){
-//         alert(`Seleccione una edad`);
-//         return;
-//     }
-//     if(comentarios) === ''){
-//         alert(`Agregue un comentario`);
-//         return;
-//     }
+//Registro de animales
 
-//     let infoAnimal = animal.find((item) => item.name.tolowerCase() ===  animal.toLowerCase());
-//     let registro = null;
-//     switch(animal.tolowerCase()) {
-//         case 'aguila':
-//             registro = new aguila(animal, edad, animalData.imagen, comentarios, animalData.sonido);
-//             break;
-//         case 'leon':
-//             registro = new leon(animal, edad, animalData.imagen, comentarios, animalData.sonido);
-//             break;
-//          case 'lobo':
-//             registro = new lobo(animal, edad, animalData.imagen, comentarios, animalData.sonido);
-//             break;
-//          case 'oso':
-//             registro = new oso(animal, edad, animalData.imagen, comentarios, animalData.sonido);
-//             break;
-//          case 'serpiente':
-//             registro = new serpiente(animal, edad, animalData.imagen, comentarios, animalData.sonido);
-//             break;
+document.getElementById('btnRegistrar').addEventListener('click', () => {
+    let animal = document.getElementById('animal').value;
+    let edad = document.getElementById('edad').value;
+    let comentarios = document.getElementById('comentarios').value;
 
-//     })
 
-// });
-
-import { aguila } from "./aguila.js";
-import { leon } from "./leon.js";
-import { lobo } from "./lobo.js";
-import { oso } from "./oso.js";
-import { serpiente } from "./serpiente.js";
-
-document.addEventListener('DOMContentLoaded', () => {
-    const animalInvest = [];
+    //validar campos
+    if(document.getElementById('animal').options[0].select ===true){
+        alert(`Seleccione un animal`);
+        return;
+    }
+    if(document.getElementById('edad').options[0].select ===true){
+        alert(`Seleccione una edad`);
+        return;
+    }
+    if(!comentarios){
+        alert(`Escriba un comentario`);
+        return;
+    } 
     
-    const animalPromise = (async () => {
-        const url = './animales.json';
-        try {
-            let response = await fetch(url);
-            if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
-            let data = await response.json();
-            return data.animales;
-        } catch (error) {
-            console.log("Error al obtener los animales");
-            console.log(error);
-        };
-    })().catch(error => console.error(error));
+
+    let infoAnimal = animal.find((item) => item.name.tolowerCase() ===  animal.toLowerCase());
+   
+    switch(animal.tolowerCase()) {
+        case 'aguila':
+            animalInvestigado.push(new aguila(animal, edad, animalData.imagen, comentarios, animalData.sonido));
+            break;
+        case 'leon':
+            animalInvestigado.push(new leon(animal, edad, animalData.imagen, comentarios, animalData.sonido));
+            break;
+         case 'lobo':
+            animalInvestigado.push(new lobo(animal, edad, animalData.imagen, comentarios, animalData.sonido));
+            break;
+         case 'oso':
+            animalInvestigado.push(new oso(animal, edad, animalData.imagen, comentarios, animalData.sonido));
+            break;
+         case 'serpiente':
+            animalInvestigado.push(new serpiente(animal, edad, animalData.imagen, comentarios, animalData.sonido));
+            break;
     
-    animalPromise.then((animales) => {
-        document.getElementById('btnRegistrar').addEventListener('click', () => {
-            let animal = document.getElementById('animal').value;
-            let edad = document.getElementById('edad').value;
-            let comentarios = document.getElementById('comentarios').value;
-        
-            if (animal === '') {
-                alert(`Seleccione un animal`);
-                return;
-            }
-            if (edad === '') {
-                alert(`Seleccione una edad`);
-                return;
-            }
-            if (comentarios === '') {
-                alert(`Agregue un comentario`);
-                return;
-            }
-        
-            let infoAnimal = animales.find((item) => item.nombre.toLowerCase() === animal.toLowerCase());
-            let registro = null;
-            switch (animal.toLowerCase()) {
-                case 'aguila':
-                    registro = new aguila(animal, edad, infoAnimal.imagen, comentarios, infoAnimal.sonido);
-                    break;
-                case 'leon':
-                    registro = new leon(animal, edad, infoAnimal.imagen, comentarios, infoAnimal.sonido);
-                    break;
-                case 'lobo':
-                    registro = new lobo(animal, edad, infoAnimal.imagen, comentarios, infoAnimal.sonido);
-                    break;
-                case 'oso':
-                    registro = new oso(animal, edad, infoAnimal.imagen, comentarios, infoAnimal.sonido);
-                    break;
-                case 'serpiente':
-                    registro = new serpiente(animal, edad, infoAnimal.imagen, comentarios, infoAnimal.sonido);
-                    break;
-                default:
-                    alert('Animal no reconocido');
-                    return;
-            }
-            animalInvest.push(registro);
-            console.log(animalInvest); // Solo para propósito de demostración, puedes hacer algo más con los registros
-        });
-    });
-});
+        default:
+        alert('Animal fuera del catalogo');
+            break;      
+    });  
