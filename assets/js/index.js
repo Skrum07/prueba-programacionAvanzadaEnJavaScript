@@ -8,41 +8,41 @@ const url = './animales.json';
 
 const investigatedAnimals = [];
 
-const animals = await (async () => {
+const fetchAnimals =async () => {
     try {
-        let response = await fetch(url);
+        const response = await fetch(url);
         if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
 
-        let data = await response.json();
+        const data = await response.json();
         return data.animales;
     } catch (error) {
         console.log("Error al obtener los animales");
     }
-})();
+};
 
 //Eventos
 // Registro de animales
 
 document.getElementById('btnRegistrar').addEventListener('click', () => {
-    let animal = document.getElementById('animal').value;
-    let edad = document.getElementById('edad').value;
-    let comentario = document.getElementById('comentarios').value;
+    const animal = document.getElementById('animal').value;
+    const edad = document.getElementById('edad').value;
+    const comentario = document.getElementById('comentarios').value;
 
     // Validar campos
-    if (animal === "") {
-        alert(`Seleccione un animal`);
+    if(document.getElementById('animal').options[0].selected){
+        alert('Ingrese un animal');
         return;
-    }
-    if (edad === "") {
-        alert(`Seleccione una edad`);
+      }
+      if(document.getElementById('edad').options[0].selected){
+        alert('Ingrese la edad del animal');
         return;
-    }
-    if (comentario === "") {
-        alert(`Escriba un comentario`);
+      }
+      if(!comentario){
+        alert('Ingrese un comentario');
         return;
-    }
+      }
 
-    let animalData = animals.find((item) => item.name.toLowerCase() === animal.toLowerCase());
+    const animalData = animals.find((item) => item.name.toLowerCase() === animal.toLowerCase());
 
     switch (animal.toLowerCase()) {
         case 'aguila':
@@ -71,7 +71,7 @@ document.getElementById('btnRegistrar').addEventListener('click', () => {
 document.getElementById('animal').addEventListener('change', (event) => {
     const animalData = animals.find((item) => item.name.toLowerCase() === event.target.value.toLowerCase());
 
-    const img = document.getElementById('img');
+    const img = document.createElement('img');
     img.setAttribute('src', `./assets/imgs/${animalData.imagen}`);
 
     const previewSection = document.getElementById('preview');
@@ -80,7 +80,7 @@ document.getElementById('animal').addEventListener('change', (event) => {
 });
 
 // Funciones
-const displayInvestigatedAnimals(investigatedAnimals) => {
+const displayInvestigatedAnimals = (investigatedAnimals) => {
     const animalsContainer = document.getElementById('animales');
     animalsContainer.innerHTML = '';
 
@@ -92,9 +92,9 @@ const displayInvestigatedAnimals(investigatedAnimals) => {
         const audio = document.createElement('audio');
 
         animalCard.setAttribute('class', 'animal-card');
-        animalImage.setAttribute('src', `./assets/imgs/${animal.img}`);
-        animalAudio.setAttribute('id', `audio${animal.nombre}`);
-        animalAudio.setAttribute('src', `./assets/sounds/${animal.sonido}`);
+        cardImg.setAttribute('src', `./assets/imgs/${animal.img}`);
+        audio.setAttribute('id', `audio${animal.nombre}`);
+        audio.setAttribute('src', `./assets/sounds/${animal.sonido}`);
 
         cardBtn.appendChild(icon);
         cardBtn.appendChild(audio);
@@ -127,7 +127,7 @@ const displayInvestigatedAnimals(investigatedAnimals) => {
                     console.log('Sonido de animal no encontrado');
             }
         });
-        animalContainer.appendChild(animalCard);
+        animalsContainer.appendChild(animalCard);
     });
 }
 
@@ -162,3 +162,10 @@ const resetInputValues = () =>{
     document.getElementById('comentarios').value = '';
     document.getElementById('preview').innerHTML = '';
 };
+
+let animals = [];
+fetchAnimals().then((data) => {
+    animals = data;
+}).catch((error) => {
+    console.error('Error fetching animal data:', error);
+});

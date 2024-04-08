@@ -5,6 +5,6 @@ export class Oso extends Animal{
         super(nombre, edad, img, comentarios, sonido)
     }
 gruñido(){
-    document.getElementById(`auio${this.nombre}`).play();
+    document.getElementById(`audio${this.nombre}`).play();
     }
 }

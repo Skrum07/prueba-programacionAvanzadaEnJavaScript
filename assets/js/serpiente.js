@@ -5,6 +5,6 @@ export class Serpiente extends Animal{
         super(nombre, edad, img, comentarios, sonido)
     }
 siseo(){
-    document.getElementById(`auio${this.nombre}`).onplay();
+    document.getElementById(`audio${this.nombre}`).play();
     }
 }

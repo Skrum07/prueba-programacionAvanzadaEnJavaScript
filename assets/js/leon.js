@@ -5,6 +5,6 @@ export class Leon extends Animal{
         super(nombre, edad, img, comentarios, sonido)
     }
 rugir(){
-    document.getElementById(`auio${this.nombre}`).play();
+    document.getElementById(`audio${this.nombre}`).play();
     }
 }
