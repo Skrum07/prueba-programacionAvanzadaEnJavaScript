@@ -94,7 +94,7 @@ const displayInvestigatedAnimals = (investigatedAnimals) => {
         animalCard.setAttribute('class', 'animal-card');
         cardImg.setAttribute('src', `./assets/imgs/${animal.img}`);
         icon.setAttribute('class', 'fa-solid fa-volume-high');
-        audio.setAttribute('id', `audio-${animal.nombre}`);
+        audio.setAttribute('id', `audio${animal.nombre}`);
         audio.setAttribute('src', `./assets/sounds/${animal.sonido}`);
 
         cardBtn.appendChild(icon);
