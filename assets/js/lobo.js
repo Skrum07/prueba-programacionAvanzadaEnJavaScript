@@ -1,10 +1,10 @@
-import animal from './animal.js';
+import Animal from './animal.js';
 
-export class lobo extends animal{
+export class Lobo extends Animal{
     constructor(nombre, edad, img, comentarios, sonido){
         super(nombre, edad, img, comentarios, sonido)
     }
-aullido(){
-    document.getElementById(`auio${this.nombre}`).onplay();
+aullar(){
+    document.getElementById(`auio${this.nombre}`).play();
     }
 }

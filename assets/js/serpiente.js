@@ -1,6 +1,6 @@
-import animal from './animal.js';
+import Animal from './animal.js';
 
-export class serpiente extends animal{
+export class Serpiente extends Animal{
     constructor(nombre, edad, img, comentarios, sonido){
         super(nombre, edad, img, comentarios, sonido)
     }

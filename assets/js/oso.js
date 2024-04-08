@@ -1,10 +1,10 @@
-import animal from './animal.js';
+import Animal from './animal.js';
 
-export class oso extends animal{
+export class Oso extends Animal{
     constructor(nombre, edad, img, comentarios, sonido){
         super(nombre, edad, img, comentarios, sonido)
     }
 gruñido(){
-    document.getElementById(`auio${this.nombre}`).onplay();
+    document.getElementById(`auio${this.nombre}`).play();
     }
 }

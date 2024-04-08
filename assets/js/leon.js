@@ -1,10 +1,10 @@
-import animal from './animal.js';
+import Animal from './animal.js';
 
-export class leon extends animal{
+export class Leon extends Animal{
     constructor(nombre, edad, img, comentarios, sonido){
         super(nombre, edad, img, comentarios, sonido)
     }
-rugido(){
-    document.getElementById(`auio${this.nombre}`).onplay();
+rugir(){
+    document.getElementById(`auio${this.nombre}`).play();
     }
 }
